@@ -79,3 +79,10 @@ SELECT * FROM tb_order
 INNER JOIN tb_order_product ON tb_order.id = tb_order_product.order_id
 INNER JOIN tb_product ON tb_product.id = tb_order_product.product_id
 ```
+
+# Start and stop Postgres manually
+
+```
+$ pg_ctl -D /usr/local/var/postgres start
+$ pg_ctl -D /usr/local/var/postgres stop
+```
