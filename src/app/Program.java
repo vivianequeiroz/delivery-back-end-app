@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Map;
 
 import db.DB;
 import entities.Order;
@@ -22,14 +24,38 @@ public class Program {
 				+ "INNER JOIN tb_order_product ON tb_order.id = tb_order_product.order_id "
 				+ "INNER JOIN tb_product ON tb_product.id = tb_order_product.product_id");
 
+		// interface -> class
+		Map<Long, Order> mapOrder = new HashMap<>();
+		Map<Long, Product> mapProducts = new HashMap<>();
+
 		while (rs.next()) {
 
-			// Product product = instantiateProduct(rs);
+			Long orderId = rs.getLong("order_id");
+			if (mapOrder.get(orderId) == null) {
+				Order order = instantiateOrder(rs);
+				mapOrder.put(orderId, order);
+			}
 
-			Order orders = instantiateOrder(rs);
+			Long productId = rs.getLong("product_id");
+			if (mapProducts.get(productId) == null) {
+				Product product = instantiateProduct(rs);
+				mapProducts.put(productId, product);
+			}
 
-			System.out.println(orders);
+			mapOrder.get(orderId).getProducts().add(mapProducts.get(productId));
+
 		}
+
+		for (Long orderId : mapOrder.keySet()) {
+			System.out.println(mapOrder.get(orderId));
+
+			for (Product product : mapOrder.get(orderId).getProducts()) {
+				System.out.println(product);
+			}
+
+			System.out.println();
+		}
+
 	}
 
 	private static Product instantiateProduct(ResultSet rs) throws SQLException {
