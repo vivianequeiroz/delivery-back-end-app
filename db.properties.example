@@ -1,0 +1,4 @@
+user=username_configured_at_postgres_server
+password=password_configured_at_postgres_server
+dburl=jdbc:postgresql://localhost:5432/database_name
+useSSL=false
