@@ -1,6 +1,8 @@
 # Delivery back-end app
 
 The goal of this project is to review some main concepts of the object oriented programming using Java language.
+Here, some products and orders are recovered from the database and processed in order to be sent to a front-end application.
+Considering the goal of review OOP Concepts, no ORM tools were used. 
 
 Some of the these concepts reviewed are:
 
